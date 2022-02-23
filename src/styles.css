@@ -62,3 +62,12 @@ button:hover {
   color: #8de8fd;
   transition: all 50ms ease-out;
 }
+#github-link {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+.profile {
+  text-decoration: none;
+  color: black;
+}
