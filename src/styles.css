@@ -74,3 +74,7 @@ button:hover {
 #weather-description {
   text-transform: capitalize;
 }
+#weather-temperature .active {
+  color: black;
+  cursor: default;
+}

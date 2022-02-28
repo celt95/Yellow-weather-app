@@ -46,11 +46,15 @@ function callCity(event) {
     fahrenheitValue.addEventListener("click", provideFarenheitValue);
     function provideFarenheitValue() {
       todayTemperature.innerHTML = Math.round((temperatureResult * 9) / 5 + 32);
+      document.querySelector("#celsius-value").classList.add("active");
+      document.querySelector("#fahrenheit-value").classList.remove("active");
     }
     let celsiusValue = document.querySelector("#celsius-value");
     celsiusValue.addEventListener("click", provideCelsiusValue);
     function provideCelsiusValue() {
       todayTemperature.innerHTML = temperatureResult;
+      document.querySelector("#celsius-value").classList.remove("active");
+      document.querySelector("#fahrenheit-value").classList.add("active");
     }
   }
   let apiKey = "f8076bd4bc37c523b0e21539b245eabc";
@@ -89,6 +93,8 @@ button.addEventListener("click", function () {
         currentGeolocationTemperature.innerHTML = Math.round(
           response.data.main.temp
         );
+        celsius.classList.remove("active");
+        fahrenheit.classList.add("active");
       }
 
       let fahrenheit = document.querySelector("#fahrenheit-value");
@@ -97,6 +103,8 @@ button.addEventListener("click", function () {
         currentGeolocationTemperature.innerHTML = Math.round(
           (response.data.main.temp * 9) / 5 + 32
         );
+        celsius.classList.add("active");
+        fahrenheit.classList.remove("active");
       }
 
       let currentCity = document.querySelector("h1");
