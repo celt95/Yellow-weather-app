@@ -71,3 +71,6 @@ button:hover {
   text-decoration: none;
   color: black;
 }
+#weather-description {
+  text-transform: capitalize;
+}

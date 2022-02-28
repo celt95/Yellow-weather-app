@@ -4,6 +4,9 @@ function callCity(event) {
   let h1 = document.querySelector("h1");
   h1.innerHTML = `${searchInput.value} `;
   function displayTemperature(response) {
+    console.log(response);
+    document.querySelector("#weather-description").innerHTML =
+      response.data.weather[0].description;
     let temperatureResult = Math.round(response.data.main.temp);
     let todayTemperature = document.querySelector("#today-temperature");
     todayTemperature.innerHTML = temperatureResult;
