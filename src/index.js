@@ -59,21 +59,6 @@ function callCity(event) {
 }
 let form = document.querySelector("form");
 form.addEventListener("submit", callCity);
-let now = new Date();
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-let day = days[now.getDay()];
-let hour = now.getHours();
-let minutes = now.getMinutes();
-let theDate = document.querySelector("#date-and-time");
-theDate.innerHTML = `${day} ${hour}:${minutes}`;
 
 let button = document.querySelector("button");
 button.addEventListener("click", function () {
@@ -90,6 +75,14 @@ button.addEventListener("click", function () {
       currentGeolocationTemperature.innerHTML = Math.round(
         response.data.main.temp
       );
+      document.querySelector("#weather-description").innerHTML =
+        response.data.weather[0].description;
+      document.querySelector("#wind-speed").innerHTML = Math.round(
+        response.data.wind.speed
+      );
+      document.querySelector("#humidity-value").innerHTML =
+        response.data.main.humidity;
+
       let celsius = document.querySelector("#celsius-value");
       celsius.addEventListener("click", changeUnitTocelsius);
       function changeUnitTocelsius() {
