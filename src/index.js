@@ -42,6 +42,15 @@ function callCity(event) {
     let temperatureResult = Math.round(response.data.main.temp);
     let todayTemperature = document.querySelector("#today-temperature");
     todayTemperature.innerHTML = temperatureResult;
+    if (temperatureResult < 0) {
+      document
+        .querySelector("#main-icon")
+        .setAttribute("src", (src = "media/Snow_Two Color.png"));
+    } else {
+      document
+        .querySelector("#main-icon")
+        .setAttribute("src", (src = "media/rainyday.png"));
+    }
     let fahrenheitValue = document.querySelector("#fahrenheit-value");
     fahrenheitValue.addEventListener("click", provideFarenheitValue);
     function provideFarenheitValue() {
