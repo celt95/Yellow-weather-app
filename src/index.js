@@ -7,6 +7,11 @@ function callCity(event) {
     console.log(response);
     document.querySelector("#weather-description").innerHTML =
       response.data.weather[0].description;
+    document.querySelector("#wind-speed").innerHTML = Math.round(
+      response.data.wind.speed
+    );
+    document.querySelector("#humidity-value").innerHTML =
+      response.data.main.humidity;
     let temperatureResult = Math.round(response.data.main.temp);
     let todayTemperature = document.querySelector("#today-temperature");
     todayTemperature.innerHTML = temperatureResult;
