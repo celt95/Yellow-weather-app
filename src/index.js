@@ -45,11 +45,11 @@ function callCity(event) {
     if (temperatureResult < 0) {
       document
         .querySelector("#main-icon")
-        .setAttribute("src", (src = "media/Snow_Two Color.png"));
+        .setAttribute("src", "media/Snow_Two Color.png");
     } else {
       document
         .querySelector("#main-icon")
-        .setAttribute("src", (src = "media/rainyday.png"));
+        .setAttribute("src", "media/rainyday.png");
     }
     let fahrenheitValue = document.querySelector("#fahrenheit-value");
     fahrenheitValue.addEventListener("click", provideFarenheitValue);
