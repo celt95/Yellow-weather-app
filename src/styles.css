@@ -15,10 +15,12 @@
   border: 0;
   outline: 0;
 }
-img {
+#main-icon {
   width: 100%;
 }
-
+.forecast-icon {
+  width: 32px;
+}
 .city-values {
   padding: 30px 36px;
 }
@@ -30,14 +32,22 @@ img {
   margin-top: 24px;
 }
 .emoji {
-  font-size: 36px;
+  font-size: 35px;
 }
 .day-weather {
+  background: #8de8fd;
+  margin: 0 12px;
+  padding: 6px;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.day-weather:hover {
   background: white;
   margin: 0 12px;
   padding: 6px;
   border-radius: 6px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: all 200ms ease-out;
 }
 .day {
   font-weight: 500;
@@ -60,7 +70,7 @@ button {
 button:hover {
   background-color: white;
   color: #8de8fd;
-  transition: all 50ms ease-out;
+  transition: all 200ms ease-out;
 }
 #github-link {
   display: block;

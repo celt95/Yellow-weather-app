@@ -46,7 +46,7 @@ function displayForecast(response) {
         `<div class="col day-weather">
             <div class="day">${formatDay(forecastDay.dt)}</div>
             <div class="emoji"> 
-            <img src="http://openweathermap.org/img/wn/${
+            <img class="forecast-icon" src="http://openweathermap.org/img/wn/${
               forecastDay.weather[0].icon
             }@2x.png"/>
             </div>
