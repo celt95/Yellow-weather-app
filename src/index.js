@@ -66,17 +66,22 @@ function getForecast(coordinates) {
   console.log(oneCallApi);
   axios.get(oneCallApi).then(displayForecast);
 }
-function callCity(event) {
+function searchCity(city) {
+  let apiKey = "f8076bd4bc37c523b0e21539b245eabc";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayTemperature);
+}
+function handleSubmit(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-text-input");
-  let h1 = document.querySelector("h1");
-  h1.innerHTML = `${searchInput.value} `;
-  let apiKey = "f8076bd4bc37c523b0e21539b245eabc";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayTemperature);
+  //let h1 = document.querySelector("h1");
+  //h1.innerHTML = `${searchInput.value} `;
+  searchCity(searchInput.value);
 }
 function displayTemperature(response) {
   console.log(response.data);
+  let h1 = document.querySelector("h1");
+  h1.innerHTML = response.data.name;
   document.querySelector("#date-and-time").innerHTML = formatDate(
     response.data.dt * 1000
   );
@@ -117,7 +122,7 @@ function displayTemperature(response) {
 }
 
 let form = document.querySelector("form");
-form.addEventListener("submit", callCity);
+form.addEventListener("submit", handleSubmit);
 function displayGeolocationTemperature(response) {
   document.querySelector("#today-temperature").innerHTML = Math.round(
     response.data.main.temp
@@ -160,3 +165,4 @@ function reactToButton() {
 }
 let button = document.querySelector("button");
 button.addEventListener("click", reactToButton);
+searchCity("Madrid");
