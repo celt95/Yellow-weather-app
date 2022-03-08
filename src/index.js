@@ -95,14 +95,14 @@ function displayTemperature(response) {
   let temperatureResult = Math.round(response.data.main.temp);
   let todayTemperature = document.querySelector("#today-temperature");
   todayTemperature.innerHTML = temperatureResult;
-  if (temperatureResult < 0) {
+  if (response.data.weather[0].main === "Clear") {
     document
       .querySelector("#main-icon")
-      .setAttribute("src", "media/nicesnowyday.png");
+      .setAttribute("src", "media/sunnyday.png");
   } else {
     document
       .querySelector("#main-icon")
-      .setAttribute("src", "media/rainyday.png");
+      .setAttribute("src", "media/verywarmday.png");
   }
   let fahrenheitValue = document.querySelector("#fahrenheit-value");
   fahrenheitValue.addEventListener("click", provideFarenheitValue);
