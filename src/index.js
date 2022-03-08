@@ -35,8 +35,23 @@ function formatDay(timestamp) {
   let day = date.getDay();
   return days[day];
 }
+function getWeatherIcon(description) {
+  if (description === "Clear") {
+    return "media/sunnyday.png";
+  }
+  if (
+    description === "Drizzle" ||
+    description === "Thunderstorm" ||
+    description === "Rain"
+  ) {
+    return "media/rainyday.png";
+  }
+  if (description === "Snow") {
+    return "media/nicesnowyday.png";
+  }
+  return "media/earthweather.png";
+}
 function displayForecast(response) {
-  console.log(response.data.daily);
   let forecast = response.data.daily;
   let forecastBlock = `<div class="row previsions">`;
   forecast.forEach(function (forecastDay, index) {
@@ -60,10 +75,8 @@ function displayForecast(response) {
   forecastElement.innerHTML = forecastBlock;
 }
 function getForecast(coordinates) {
-  console.log(coordinates);
   let apiKey = "f8076bd4bc37c523b0e21539b245eabc";
   let oneCallApi = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-  console.log(oneCallApi);
   axios.get(oneCallApi).then(displayForecast);
 }
 function searchCity(city) {
@@ -74,12 +87,9 @@ function searchCity(city) {
 function handleSubmit(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-text-input");
-  //let h1 = document.querySelector("h1");
-  //h1.innerHTML = `${searchInput.value} `;
   searchCity(searchInput.value);
 }
 function displayTemperature(response) {
-  console.log(response.data);
   let h1 = document.querySelector("h1");
   h1.innerHTML = response.data.name;
   document.querySelector("#date-and-time").innerHTML = formatDate(
@@ -95,15 +105,10 @@ function displayTemperature(response) {
   let temperatureResult = Math.round(response.data.main.temp);
   let todayTemperature = document.querySelector("#today-temperature");
   todayTemperature.innerHTML = temperatureResult;
-  if (response.data.weather[0].main === "Clear") {
-    document
-      .querySelector("#main-icon")
-      .setAttribute("src", "media/sunnyday.png");
-  } else {
-    document
-      .querySelector("#main-icon")
-      .setAttribute("src", "media/verywarmday.png");
-  }
+  document
+    .querySelector("#main-icon")
+    .setAttribute("src", getWeatherIcon(response.data.weather[0].main));
+
   let fahrenheitValue = document.querySelector("#fahrenheit-value");
   fahrenheitValue.addEventListener("click", provideFarenheitValue);
   function provideFarenheitValue() {
