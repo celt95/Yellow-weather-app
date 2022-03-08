@@ -21,6 +21,51 @@ function formatDate(timestamp) {
 
   return `${day} ${hours}:${minutes}`;
 }
+function formatDay(timestamp) {
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  return days[day];
+}
+function displayForecast(response) {
+  console.log(response.data.daily);
+  let forecast = response.data.daily;
+  let forecastBlock = `<div class="row previsions">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6 && index > 0) {
+      forecastBlock =
+        forecastBlock +
+        `<div class="col day-weather">
+            <div class="day">${formatDay(forecastDay.dt)}</div>
+            <div class="emoji"> 
+            <img src="http://openweathermap.org/img/wn/${
+              forecastDay.weather[0].icon
+            }@2x.png"/>
+            </div>
+            <div>${Math.round(forecastDay.temp.day)}°C</div>
+          </div>
+        `;
+    }
+  });
+  forecastBlock = forecastBlock + `</div> `;
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = forecastBlock;
+}
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "f8076bd4bc37c523b0e21539b245eabc";
+  let oneCallApi = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  console.log(oneCallApi);
+  axios.get(oneCallApi).then(displayForecast);
+}
 function callCity(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-text-input");
@@ -31,6 +76,7 @@ function callCity(event) {
   axios.get(apiUrl).then(displayTemperature);
 }
 function displayTemperature(response) {
+  console.log(response.data);
   document.querySelector("#date-and-time").innerHTML = formatDate(
     response.data.dt * 1000
   );
@@ -67,6 +113,7 @@ function displayTemperature(response) {
     document.querySelector("#celsius-value").classList.add("active");
     document.querySelector("#fahrenheit-value").classList.remove("active");
   }
+  getForecast(response.data.coord);
 }
 
 let form = document.querySelector("form");
