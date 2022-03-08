@@ -98,7 +98,7 @@ function displayTemperature(response) {
   if (temperatureResult < 0) {
     document
       .querySelector("#main-icon")
-      .setAttribute("src", "media/Snow_Two Color.png");
+      .setAttribute("src", "media/nicesnowyday.png");
   } else {
     document
       .querySelector("#main-icon")
